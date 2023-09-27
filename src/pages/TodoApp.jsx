@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { AddTodo } from "../components/TodoForm";
-
+import { TodoForm } from "../components/TodoForm";
 
 export const TodoApp = () => {
 
@@ -48,7 +47,7 @@ export const TodoApp = () => {
         {/* TodoAdd */}
         <div className="row mb-3">
           <div className="col-sm-12 col-md-4 mb-2 mb-md-3 mb-lg-0 ">
-            <AddTodo 
+            <TodoForm
               inputChange={inputChange}
               setTodoList={setTodoList}
               todo={todo}
@@ -59,6 +58,7 @@ export const TodoApp = () => {
           {/* TodoList */}
           <div className="col-sm-12 col-md-8">
             <h3>Todo List</h3>
+
             <ul className="list-unstyled">
               {
   
@@ -73,7 +73,7 @@ export const TodoApp = () => {
                     <li 
                     key={todo.id}
                     className={`d-flex justify-content-between mb-2 alert ${(todo.done) ? 'alert-success' : 'alert-warning'}`}>
-                      <span>{ todo.desc }</span> 
+                      <span>{ todo.text}</span> 
                       <button 
                         className={`btn btn-sm ${(todo.done)? 'btn-success': 'btn-warning' }`}
                         id={todo.id}
