@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { TodoApp } from './pages/TodoApp'
 
 
 function App() {
 
   return (
     <>
-
+     <TodoApp />
     </>
   )
 }

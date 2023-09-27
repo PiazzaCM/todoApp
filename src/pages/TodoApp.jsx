@@ -1,14 +1,30 @@
-
-
+import { useState } from "react";
+import { AddTodo } from "../components/TodoForm";
 
 
 export const TodoApp = () => {
 
-    // Lógica para almacenar los todos
-
-    // Lógica para añadir un todo
-
-    // Lógica para completar un todo
+    const [todoList, setTodoList] = useState([]);
+    const [todo, setTodo] = useState('');
+    
+  
+  
+    const inputChange = ({ target }) => {
+      setTodo(target.value)
+    }
+  
+    // Recorrer la lista de Todos y modificar la propiedad done
+    const completeTodo = ({ target }) => {
+        const todos = todoList.map( todo => {
+          if(todo.id === +target.id){
+            todo.done = !todo.done
+            return todo;
+          }
+          return todo;
+        })
+  
+        setTodoList(todos);
+    }
   
     return (
       <div className="container">
@@ -32,14 +48,11 @@ export const TodoApp = () => {
         {/* TodoAdd */}
         <div className="row mb-3">
           <div className="col-sm-12 col-md-4 mb-2 mb-md-3 mb-lg-0 ">
-            <h3>New Todo</h3>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Add Todo"
-              name="desc"
-              // Evento cuando cambia el valor del input
-              // Evento cuando presiona tecla Enter en ASCII
+            <AddTodo 
+              inputChange={inputChange}
+              setTodoList={setTodoList}
+              todo={todo}
+              todoList={todoList}
             />
           </div>
   
@@ -47,11 +60,38 @@ export const TodoApp = () => {
           <div className="col-sm-12 col-md-8">
             <h3>Todo List</h3>
             <ul className="list-unstyled">
-              {/* TodoList Item */}
+              {
+  
+                (todoList.length === 0)
+                ? 
+                (
+                  <li className="alert alert-info">No hay todos</li>
+                )
+                :
+                (
+                  todoList.map( todo => (
+                    <li 
+                    key={todo.id}
+                    className={`d-flex justify-content-between mb-2 alert ${(todo.done) ? 'alert-success' : 'alert-warning'}`}>
+                      <span>{ todo.desc }</span> 
+                      <button 
+                        className={`btn btn-sm ${(todo.done)? 'btn-success': 'btn-warning' }`}
+                        id={todo.id}
+                        onClick={ completeTodo }
+                      >
+                        {(todo.done)? 'Completada' : 'Completar'}
+                      </button>
+                    </li>
+                  ))
+                )
+  
+  
+              }
+             
             </ul>
+  
           </div>
         </div>
       </div>
     )
   }
-  
