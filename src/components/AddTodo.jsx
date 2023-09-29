@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const TodoForm = ({setTodoList, todoList}) => {
+export const AddTodo = ({setTodoList, todoList}) => {
 
     const [text, setText] = useState("")
 
