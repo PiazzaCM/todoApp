@@ -2,7 +2,7 @@ import { useState } from "react"
 import { AddTodo } from "../components/AddTodo"
 import { TodoListItem } from "../components/TodoListItem"
 
-const TodoApp = () => {
+export const TodoApp = () => {
   const [todoList, setTodoList] = useState([]);
   const [todo, setTodo] = useState("");
 
